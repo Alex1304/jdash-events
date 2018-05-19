@@ -27,7 +27,7 @@ public class GDEventManagerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.em = new GDEventManager();
+		this.em = GDEventManager.getInstance();
 		this.testEvent = new GDEvent<GDLevel>("TEST_EVENT", level -> testEventFired = true);
 		this.testEventFired = false;
 	}

@@ -17,9 +17,22 @@ import com.github.alex1304.jdashevents.GDEvent;
 public class GDEventManager implements Iterable<GDEvent<?>> {
 
 	private List<GDEvent<?>> registeredEvents;
+	private static GDEventManager instance = null;
 	
-	public GDEventManager() {
+	private GDEventManager() {
 		this.registeredEvents = new ArrayList<>();
+	}
+	
+	/**
+	 * Returns a unique instance of GDEventManager
+	 *
+	 * @return GDEventManager
+	 */
+	public static GDEventManager getInstance() {
+		if (instance == null)
+			instance = new GDEventManager();
+		
+		return instance;
 	}
 	
 	/**
