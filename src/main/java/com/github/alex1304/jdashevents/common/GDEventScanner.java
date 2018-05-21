@@ -1,14 +1,20 @@
 package com.github.alex1304.jdashevents.common;
 
+import java.util.List;
+
 import com.github.alex1304.jdash.api.GDHttpClient;
 import com.github.alex1304.jdash.api.GDHttpRequest;
 import com.github.alex1304.jdash.component.GDComponent;
 import com.github.alex1304.jdash.exceptions.GDAPIException;
+import com.github.alex1304.jdashevents.manager.GDDispatchableEvent;
 import com.github.alex1304.jdashevents.manager.GDEventManager;
 
 /**
  * Looks up for data onto Geometry Dash servers in order to determine whether or
- * not an event should be triggered. 
+ * not an event should be triggered.
+ * 
+ * @param <T>
+ *            - The type of component to scan
  *
  * @author Alex1304
  */
@@ -44,33 +50,33 @@ public abstract class GDEventScanner<T extends GDComponent> {
 	public void scan() throws GDAPIException {
 		T response = client.fetch(request);
 
-		String event = this.eventToDispatch(previousResponse, response);
+		List<GDDispatchableEvent> eventList = this.compareAndListEvents(previousResponse, response);
 
-		if (event != null)
-			GDEventManager.getInstance().dispatch(event, response);
+		for (GDDispatchableEvent event : eventList)
+			GDEventManager.getInstance().dispatch(event);
 
 		this.previousResponse = response;
 	}
 	
 	/**
-	 * Compares the previous response of the request and the current one in
-	 * order to determine the event to dispach. There are two things you need to
+	 * Compares the previous response of the request with the current one in
+	 * order to determine which events to emit. There are two things you need to
 	 * know when implementing this method:
 	 * <ul>
-	 * <li><code>previousResponse</code> will be null if the scan() method has
-	 * never been called before</li>
+	 * <li><code>previousResponse</code> will be null if it's the first
+	 * scan</li>
 	 * <li>If no event is supposed to dispatch after comparing the two
-	 * responses, this method must return null</li>
+	 * responses, this method must return an empty list</li>
 	 * </ul>
 	 * 
 	 * @param previousResponse
-	 *            - the response resulting of the previous call of scan(). This
-	 *            is null if it's the first call of scan()
+	 *            - the response resulting of the previous request. This is null
+	 *            if it's the first request
 	 * @param currentResponse
-	 *            - the response returned by the current call of scan()
-	 * @return String - the event name to dispatch, or null if nothing should be
-	 *         dispatched
+	 *            - the response returned by the current request
+	 * @return List - the list of events to be dispatched later, resulting of
+	 *         the comparison of the two responses
 	 */
-	public abstract String eventToDispatch(T previousResponse, T currentResponse);
+	public abstract List<GDDispatchableEvent> compareAndListEvents(T previousResponse, T currentResponse);
 }
  

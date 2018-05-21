@@ -65,6 +65,17 @@ public class GDEventManager implements Iterable<GDEvent<?>> {
 		}
 	}
 	
+	/**
+	 * Executes the action of all events having the same name as the given
+	 * dispatchable event object and applies on the associated component
+	 * 
+	 * @param event
+	 *            - the dispatchable event to dispatch
+	 */
+	public void dispatch(GDDispatchableEvent event) {
+		this.dispatch(event.getEvent(), event.getComponent());
+	}
+	
 	@Override
 	public Iterator<GDEvent<?>> iterator() {
 		return registeredEvents.iterator();
