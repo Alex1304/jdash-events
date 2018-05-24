@@ -71,4 +71,9 @@ public class GDDispatchableEvent {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "GDDispatchableEvent [event=" + event + ", component=" + component + "]";
+	}
 }

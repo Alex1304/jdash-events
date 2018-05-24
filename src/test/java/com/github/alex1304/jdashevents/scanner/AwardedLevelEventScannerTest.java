@@ -1,4 +1,4 @@
-package com.github.alex1304.jdashevents.common;
+package com.github.alex1304.jdashevents.scanner;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,6 +16,8 @@ import com.github.alex1304.jdash.component.GDLevelPreview;
 import com.github.alex1304.jdash.component.property.GDLevelDemonDifficulty;
 import com.github.alex1304.jdash.component.property.GDLevelDifficulty;
 import com.github.alex1304.jdash.component.property.GDLevelLength;
+import com.github.alex1304.jdashevents.common.CommonEvents;
+import com.github.alex1304.jdashevents.customcomponents.GDUpdatedComponent;
 import com.github.alex1304.jdashevents.manager.GDDispatchableEvent;
 
 /**
@@ -28,9 +30,9 @@ public class AwardedLevelEventScannerTest {
 	private static GDHttpClient client;
 	
 	private AwardedLevelEventScanner scanner;
-	private GDComponentList<GDLevelPreview> a, b, c, d, e, f;
+	private GDComponentList<GDLevelPreview> a, b, c, d, e, f, g;
 	
-	private GDLevelPreview bloodbath, nerves, kotoruption, bloodlust, sonicwave, doramichallenge;
+	private GDLevelPreview bloodbath, nerves, kotoruption, bloodlust, sonicwave, doramichallenge, doramichallenge2;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -46,6 +48,7 @@ public class AwardedLevelEventScannerTest {
 		this.d = new GDComponentList<>();
 		this.e = new GDComponentList<>();
 		this.f = new GDComponentList<>();
+		this.g = new GDComponentList<>();
 
 		this.bloodbath = new GDLevelPreview(10565740, "Bloodbath", "Riot", GDLevelDifficulty.DEMON,
 				GDLevelDemonDifficulty.EXTREME, 10, "At the speed of light", 10330, false, 10318375, 1002472,
@@ -65,6 +68,9 @@ public class AwardedLevelEventScannerTest {
 		this.doramichallenge = new GDLevelPreview(25263313, "Dorami Challenge", "Elit3gamer", GDLevelDifficulty.HARD,
 				GDLevelDemonDifficulty.HARD, 0, "Stereo Madness", 0, false, 132240, 21094,
 				GDLevelLength.TINY, 2, false, false, false);
+		this.doramichallenge2 = new GDLevelPreview(25263313, "Dorami Challenge", "Elit3gamer", GDLevelDifficulty.HARDER,
+				GDLevelDemonDifficulty.HARD, 0, "Back On Track", 0, false, 132240, 21094,
+				GDLevelLength.SHORT, 3, false, false, false);
 		
 		// Base reference
 		a.add(bloodlust);
@@ -96,6 +102,11 @@ public class AwardedLevelEventScannerTest {
 		f.add(bloodbath);
 		f.add(sonicwave);
 		f.add(nerves);
+		
+		// Updated
+		g.add(bloodlust);
+		g.add(doramichallenge2);
+		g.add(nerves);
 	}
 
 	@Test
@@ -139,6 +150,17 @@ public class AwardedLevelEventScannerTest {
 				new GDComponentList<>(Arrays.asList(doramichallenge))));
 		
 		assertEquals(expected, scanner.compareAndListEvents(a, f));
+	}
+	
+	@Test
+	public void test_updated_compareAndListEvents() {
+		final List<GDDispatchableEvent> expected = new ArrayList<>();
+		expected.add(new GDDispatchableEvent(
+				CommonEvents.AWARDED_LEVEL_UPDATED.toString(),
+				new GDComponentList<>(Arrays.asList(new GDUpdatedComponent<>(doramichallenge, doramichallenge2)))
+		));
+
+		assertEquals(expected, scanner.compareAndListEvents(a, g));
 	}
 
 }

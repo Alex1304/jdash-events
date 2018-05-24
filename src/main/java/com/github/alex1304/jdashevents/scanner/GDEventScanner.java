@@ -1,4 +1,4 @@
-package com.github.alex1304.jdashevents.common;
+package com.github.alex1304.jdashevents.scanner;
 
 import java.util.List;
 
@@ -29,8 +29,6 @@ public abstract class GDEventScanner<T extends GDComponent> {
 	 *            - the HTTP client to use for processing the requests
 	 * @param request
 	 *            - The request to make to server
-	 * @param event
-	 *            - The event to dispatch
 	 */
 	public GDEventScanner(GDHttpClient client, GDHttpRequest<T> request) {
 		this.client = client;
