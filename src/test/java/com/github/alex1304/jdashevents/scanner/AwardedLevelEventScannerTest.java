@@ -117,7 +117,7 @@ public class AwardedLevelEventScannerTest {
 	@Test
 	public void test_added_compareAndListEvents() {
 		final List<GDDispatchableEvent> expected = new ArrayList<>();
-		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_ADDED.toString(),
+		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_ADDED,
 				new GDComponentList<>(Arrays.asList(kotoruption))));
 		
 		assertEquals(expected, scanner.compareAndListEvents(a, c));
@@ -126,7 +126,7 @@ public class AwardedLevelEventScannerTest {
 	@Test
 	public void test_deleted_compareAndListEvents() {
 		final List<GDDispatchableEvent> expected = new ArrayList<>();
-		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_DELETED.toString(),
+		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_DELETED,
 				new GDComponentList<>(Arrays.asList(doramichallenge))));
 		
 		assertEquals(expected, scanner.compareAndListEvents(a, d));
@@ -135,7 +135,7 @@ public class AwardedLevelEventScannerTest {
 	@Test
 	public void test_addedButNotDeletedBecauseOffPage_compareAndListEvents() {
 		final List<GDDispatchableEvent> expected = new ArrayList<>();
-		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_ADDED.toString(),
+		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_ADDED,
 				new GDComponentList<>(Arrays.asList(kotoruption))));
 		
 		assertEquals(expected, scanner.compareAndListEvents(a, e));
@@ -144,9 +144,9 @@ public class AwardedLevelEventScannerTest {
 	@Test
 	public void test_addedAndDeleted_compareAndListEvents() {
 		final List<GDDispatchableEvent> expected = new ArrayList<>();
-		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_ADDED.toString(),
+		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_ADDED,
 				new GDComponentList<>(Arrays.asList(bloodbath, sonicwave))));
-		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_DELETED.toString(),
+		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_DELETED,
 				new GDComponentList<>(Arrays.asList(doramichallenge))));
 		
 		assertEquals(expected, scanner.compareAndListEvents(a, f));
@@ -156,7 +156,7 @@ public class AwardedLevelEventScannerTest {
 	public void test_updated_compareAndListEvents() {
 		final List<GDDispatchableEvent> expected = new ArrayList<>();
 		expected.add(new GDDispatchableEvent(
-				CommonEvents.AWARDED_LEVEL_UPDATED.toString(),
+				CommonEvents.AWARDED_LEVEL_UPDATED,
 				new GDComponentList<>(Arrays.asList(new GDUpdatedComponent<>(doramichallenge, doramichallenge2)))
 		));
 

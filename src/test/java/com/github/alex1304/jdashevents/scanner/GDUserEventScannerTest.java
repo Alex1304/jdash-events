@@ -48,7 +48,7 @@ public class GDUserEventScannerTest {
 	@Test
 	public void test_changedEvent_compareAndListEvents() {
 		final List<GDDispatchableEvent> expected = new ArrayList<>();
-		expected.add(new GDDispatchableEvent(CommonEvents.USER_ROLE_CHANGED.toString(), new GDUpdatedComponent<>(a, b)));
+		expected.add(new GDDispatchableEvent(CommonEvents.USER_ROLE_CHANGED, new GDUpdatedComponent<>(a, b)));
 		
 		assertEquals(expected, scanner.compareAndListEvents(a, b));
 	}

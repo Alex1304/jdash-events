@@ -22,7 +22,7 @@ public class TimelyLevelEventScanner extends ComponentUpdatedEventScanner<GDLeve
 	 *            - the ID of the timely level to scan
 	 */
 	public TimelyLevelEventScanner(GDHttpClient client, String changedEvent, long timelyID) {
-		super(client, new GDLevelHttpRequest(Constants.DAILY_LEVEL_ID), CommonEvents.DAILY_LEVEL_CHANGED.toString());
+		super(client, new GDLevelHttpRequest(Constants.DAILY_LEVEL_ID), CommonEvents.DAILY_LEVEL_CHANGED);
 	}
 
 	@Override

@@ -16,6 +16,6 @@ public class DailyLevelEventScanner extends TimelyLevelEventScanner {
 	 *            - the HTTP client to use for processing the requests
 	 */
 	public DailyLevelEventScanner(GDHttpClient client) {
-		super(client, CommonEvents.DAILY_LEVEL_CHANGED.toString(), Constants.DAILY_LEVEL_ID);
+		super(client, CommonEvents.DAILY_LEVEL_CHANGED, Constants.DAILY_LEVEL_ID);
 	}
 }

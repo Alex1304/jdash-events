@@ -28,8 +28,8 @@ public class AwardedLevelEventScanner extends ComponentListUpdatedEventScanner<G
 			client,
 			new GDLevelSearchHttpRequest(Constants.LEVEL_SEARCH_TYPE_AWARDED, "", new HashSet<>(),
 				new HashSet<>(), 0, false, false, false, false, false, false, false, false, Constants.LEVEL_SEARCH_DIFF_ALL),
-			CommonEvents.AWARDED_LEVEL_ADDED.toString(), CommonEvents.AWARDED_LEVEL_DELETED.toString(),
-			CommonEvents.AWARDED_LEVEL_UPDATED.toString()
+			CommonEvents.AWARDED_LEVEL_ADDED, CommonEvents.AWARDED_LEVEL_DELETED,
+			CommonEvents.AWARDED_LEVEL_UPDATED
 		);
 	}
 
