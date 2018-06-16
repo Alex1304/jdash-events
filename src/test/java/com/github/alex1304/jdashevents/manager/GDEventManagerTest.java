@@ -34,8 +34,10 @@ public class GDEventManagerTest {
 
 	@Test
 	public void test_registerEvent() {
+		long countBefore = em.getEventStream().count();
 		em.registerEvent(testEvent);
-		assertEquals(1, em.getEventStream().count());
+		long countAfter = em.getEventStream().count();
+		assertEquals(countBefore + 1, countAfter);
 	}
 	
 	@Test
