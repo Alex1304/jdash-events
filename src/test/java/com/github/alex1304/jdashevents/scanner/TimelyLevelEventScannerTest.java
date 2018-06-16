@@ -47,7 +47,7 @@ public class TimelyLevelEventScannerTest {
 	@Test
 	public void test_changedEvent_compareAndListEvents() {
 		final List<GDDispatchableEvent> expected = new ArrayList<>();
-		expected.add(new GDDispatchableEvent(CommonEvents.DAILY_LEVEL_CHANGED.toString(), new GDUpdatedComponent<>(a, b)));
+		expected.add(new GDDispatchableEvent(CommonEvents.DAILY_LEVEL_CHANGED, new GDUpdatedComponent<>(a, b)));
 		
 		assertEquals(expected, scanner.compareAndListEvents(a, b));
 	}

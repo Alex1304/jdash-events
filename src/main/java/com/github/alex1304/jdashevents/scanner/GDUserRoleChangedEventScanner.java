@@ -18,7 +18,7 @@ public class GDUserRoleChangedEventScanner extends GDUserEventScanner {
 	 *            - the ID of the user to scan
 	 */
 	public GDUserRoleChangedEventScanner(GDHttpClient client, long userID) {
-		super(client, CommonEvents.USER_ROLE_CHANGED.toString(), userID);
+		super(client, CommonEvents.USER_ROLE_CHANGED, userID);
 	}
 
 	@Override
