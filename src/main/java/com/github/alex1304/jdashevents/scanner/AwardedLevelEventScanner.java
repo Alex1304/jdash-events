@@ -45,7 +45,7 @@ public class AwardedLevelEventScanner extends ComponentListUpdatedEventScanner<G
 				o1.getCoinCount() != o2.getCoinCount() ||
 				o1.getDemonDifficulty() != o2.getDemonDifficulty() ||
 				o1.getLength() != o2.getLength() ||
-				!o1.getSongTitle().equals(o2.getSongTitle())) ? -1 : 0;
+				!o1.getSong().equals(o2.getSong())) ? -1 : 0;
 	}
 	
 	@Override

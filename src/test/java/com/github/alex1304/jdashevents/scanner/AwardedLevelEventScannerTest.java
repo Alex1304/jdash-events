@@ -13,6 +13,7 @@ import org.junit.Test;
 import com.github.alex1304.jdash.api.GDHttpClient;
 import com.github.alex1304.jdash.component.GDComponentList;
 import com.github.alex1304.jdash.component.GDLevelPreview;
+import com.github.alex1304.jdash.component.GDSong;
 import com.github.alex1304.jdash.component.property.GDLevelDemonDifficulty;
 import com.github.alex1304.jdash.component.property.GDLevelDifficulty;
 import com.github.alex1304.jdash.component.property.GDLevelLength;
@@ -51,25 +52,25 @@ public class AwardedLevelEventScannerTest {
 		this.g = new GDComponentList<>();
 
 		this.bloodbath = new GDLevelPreview(10565740, "Bloodbath", "Riot", GDLevelDifficulty.DEMON,
-				GDLevelDemonDifficulty.EXTREME, 10, "At the speed of light", 10330, false, 10318375, 1002472,
+				GDLevelDemonDifficulty.EXTREME, 10, new GDSong("dimrain47", "At the speed of light"), 10330, false, 10318375, 1002472,
 				GDLevelLength.XL, 0, false, true, false);
 		this.nerves = new GDLevelPreview(36227266, "Nerves", "Alex1304", GDLevelDifficulty.DEMON,
-				GDLevelDemonDifficulty.HARD, 10, "Nerf This!", 23700, false, 33008, 4242,
+				GDLevelDemonDifficulty.HARD, 10,  new GDSong("shut eye", "nerf this"), 23700, false, 33008, 4242,
 				GDLevelLength.LONG, 3, true, true, false);
 		this.kotoruption = new GDLevelPreview(38693063, "Kotoruption", "Alex1304", GDLevelDifficulty.DEMON,
-				GDLevelDemonDifficulty.MEDIUM, 10, "Nanamori", 24281, true, 708497, 61886,
+				GDLevelDemonDifficulty.MEDIUM, 10,  new GDSong("gdsharks", "Nanamori"), 24281, true, 708497, 61886,
 				GDLevelLength.LONG, 3, true, true, false);
 		this.bloodlust = new GDLevelPreview(42584142, "Bloodlust", "Knobbelboy", GDLevelDifficulty.DEMON,
-				GDLevelDemonDifficulty.EXTREME, 10, "At the speed of light", 24502, true, 1329414, 147305,
+				GDLevelDemonDifficulty.EXTREME, 10, new GDSong("dimrain47", "At the speed of light"), 24502, true, 1329414, 147305,
 				GDLevelLength.XL, 0, false, true, false);
 		this.sonicwave = new GDLevelPreview(3062870, "Sonic Wave", "lSunix", GDLevelDifficulty.DEMON,
-				GDLevelDemonDifficulty.EXTREME, 10, "Sonic Blaster", -1, false, 3062870, 236209,
+				GDLevelDemonDifficulty.EXTREME, 10, new GDSong("F-777", "sonic blaster"), -1, false, 3062870, 236209,
 				GDLevelLength.XL, 0, false, true, false);
 		this.doramichallenge = new GDLevelPreview(25263313, "Dorami Challenge", "Elit3gamer", GDLevelDifficulty.HARD,
-				GDLevelDemonDifficulty.HARD, 0, "Stereo Madness", 0, false, 132240, 21094,
+				GDLevelDemonDifficulty.HARD, 0, new GDSong("ForeverBound", "Stereo Madness"), 0, false, 132240, 21094,
 				GDLevelLength.TINY, 2, false, false, false);
 		this.doramichallenge2 = new GDLevelPreview(25263313, "Dorami Challenge", "Elit3gamer", GDLevelDifficulty.HARDER,
-				GDLevelDemonDifficulty.HARD, 0, "Back On Track", 0, false, 132240, 21094,
+				GDLevelDemonDifficulty.HARD, 0, new GDSong("djvi", "back on track"), 0, false, 132240, 21094,
 				GDLevelLength.SHORT, 3, false, false, false);
 		
 		// Base reference
