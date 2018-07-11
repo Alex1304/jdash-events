@@ -45,7 +45,7 @@ public abstract class GDEventScanner<T extends GDComponent> {
 	 * @throws GDAPIException
 	 *             if a problem occured while sending the request to GD servers
 	 */
-	public void scan() throws GDAPIException {
+	public synchronized void scan() throws GDAPIException {
 		T response = client.fetch(request);
 
 		List<GDDispatchableEvent> eventList = this.compareAndListEvents(previousResponse, response);
