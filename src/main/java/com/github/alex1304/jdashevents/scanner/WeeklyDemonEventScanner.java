@@ -15,6 +15,6 @@ public class WeeklyDemonEventScanner extends TimelyLevelEventScanner {
 	 *            - the HTTP client to use for processing the requests
 	 */
 	public WeeklyDemonEventScanner(GDHttpClient client) {
-		super(client, CommonEvents.WEEKLY_DEMON_CHANGED, false);
+		super(client, CommonEvents.WEEKLY_DEMON_CHANGED, true);
 	}
 }
