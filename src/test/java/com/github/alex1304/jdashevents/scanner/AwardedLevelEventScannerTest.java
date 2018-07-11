@@ -14,9 +14,6 @@ import com.github.alex1304.jdash.api.GDHttpClient;
 import com.github.alex1304.jdash.component.GDComponentList;
 import com.github.alex1304.jdash.component.GDLevelPreview;
 import com.github.alex1304.jdash.component.GDSong;
-import com.github.alex1304.jdash.component.property.GDLevelDemonDifficulty;
-import com.github.alex1304.jdash.component.property.GDLevelDifficulty;
-import com.github.alex1304.jdash.component.property.GDLevelLength;
 import com.github.alex1304.jdashevents.common.CommonEvents;
 import com.github.alex1304.jdashevents.customcomponents.GDUpdatedComponent;
 import com.github.alex1304.jdashevents.manager.GDDispatchableEvent;
@@ -50,10 +47,40 @@ public class AwardedLevelEventScannerTest {
 		this.e = new GDComponentList<>();
 		this.f = new GDComponentList<>();
 		this.g = new GDComponentList<>();
+		
+		this.bloodbath = new GDLevelPreview();
+		bloodbath.setId(10565740);
+		bloodbath.setSong(new GDSong());
+		
+		this.nerves = new GDLevelPreview();
+		nerves.setId(36227266);
+		nerves.setSong(new GDSong());
+		
+		this.kotoruption = new GDLevelPreview();
+		kotoruption.setId(38693063);
+		kotoruption.setSong(new GDSong());
+		
+		this.bloodlust = new GDLevelPreview();
+		bloodlust.setId(42584142);
+		bloodlust.setSong(new GDSong());
+		
+		this.sonicwave = new GDLevelPreview();
+		sonicwave.setId(3062870);
+		sonicwave.setSong(new GDSong());
+		
+		this.doramichallenge = new GDLevelPreview();
+		doramichallenge.setId(25263313);
+		doramichallenge.setSong(new GDSong("ForeverBound", "Stereo Madness"));
+		
+		this.doramichallenge2 = new GDLevelPreview();
+		doramichallenge2.setId(25263313);
+		doramichallenge.setSong(new GDSong("DJVI", "Back on Track"));
+		
+		/*
 
-		this.bloodbath = new GDLevelPreview(10565740, "Bloodbath", "Riot", GDLevelDifficulty.DEMON,
-				GDLevelDemonDifficulty.EXTREME, 10, new GDSong("dimrain47", "At the speed of light"), 10330, false, 10318375, 1002472,
-				GDLevelLength.XL, 0, false, true, false);
+		this.bloodbath = new GDLevelPreview(10565740, "Bloodbath", "Riot", 0, "", GDLevelDifficulty.DEMON,
+				GDLevelDemonDifficulty.EXTREME, 10, 10330, false, 10318375, 1002472,
+				GDLevelLength.XL, new GDSong("dimrain47", "At the speed of light"), 0, false, 0, 0, 0, true, false, 0, 0);
 		this.nerves = new GDLevelPreview(36227266, "Nerves", "Alex1304", GDLevelDifficulty.DEMON,
 				GDLevelDemonDifficulty.HARD, 10,  new GDSong("shut eye", "nerf this"), 23700, false, 33008, 4242,
 				GDLevelLength.LONG, 3, true, true, false);
@@ -72,7 +99,7 @@ public class AwardedLevelEventScannerTest {
 		this.doramichallenge2 = new GDLevelPreview(25263313, "Dorami Challenge", "Elit3gamer", GDLevelDifficulty.HARDER,
 				GDLevelDemonDifficulty.HARD, 0, new GDSong("djvi", "back on track"), 0, false, 132240, 21094,
 				GDLevelLength.SHORT, 3, false, false, false);
-		
+		*/
 		// Base reference
 		a.add(bloodlust);
 		a.add(doramichallenge);

@@ -19,7 +19,7 @@ public class GDEventManagerTest {
 	private GDEventManager em;
 	private GDEvent<GDLevel> testEvent;
 	private boolean testEventFired;
-	private GDLevel testLevel = new GDLevel(0, "", 0, "", null, null, 0, 0, false, 0, 0, null, 0, 0, 0, false, 0, 0, 0, false, false, 0, 0, 0, null, null);
+	private GDLevel testLevel = new GDLevel();
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

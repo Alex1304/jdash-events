@@ -1,7 +1,6 @@
 package com.github.alex1304.jdashevents.scanner;
 
 import com.github.alex1304.jdash.api.GDHttpClient;
-import com.github.alex1304.jdash.util.Constants;
 import com.github.alex1304.jdashevents.common.CommonEvents;
 
 /**
@@ -16,6 +15,6 @@ public class DailyLevelEventScanner extends TimelyLevelEventScanner {
 	 *            - the HTTP client to use for processing the requests
 	 */
 	public DailyLevelEventScanner(GDHttpClient client) {
-		super(client, CommonEvents.DAILY_LEVEL_CHANGED, Constants.DAILY_LEVEL_ID);
+		super(client, CommonEvents.DAILY_LEVEL_CHANGED, true);
 	}
 }

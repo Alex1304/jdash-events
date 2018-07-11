@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.github.alex1304.jdash.api.GDHttpClient;
-import com.github.alex1304.jdash.component.GDLevel;
+import com.github.alex1304.jdash.component.GDTimelyLevel;
 import com.github.alex1304.jdashevents.common.CommonEvents;
 import com.github.alex1304.jdashevents.customcomponents.GDUpdatedComponent;
 import com.github.alex1304.jdashevents.manager.GDDispatchableEvent;
@@ -24,7 +24,7 @@ public class TimelyLevelEventScannerTest {
 	
 	private static GDHttpClient client;
 	private TimelyLevelEventScanner scanner;
-	private GDLevel a, b;
+	private GDTimelyLevel a, b;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -34,8 +34,11 @@ public class TimelyLevelEventScannerTest {
 	@Before
 	public void setUp() throws Exception {
 		this.scanner = new DailyLevelEventScanner(client);
-		this.a = new GDLevel(1000, "test1", 1, "", null, null, 0, 0, false, 0, 0, null, 0, 0, 0, false, 0, 0, 0, false, false, 0, 0, 0, null, null);
-		this.b = new GDLevel(2000, "test2", 1, "", null, null, 0, 0, false, 0, 0, null, 0, 0, 0, false, 0, 0, 0, false, false, 0, 0, 0, null, null);
+		this.a = new GDTimelyLevel();
+		this.b = new GDTimelyLevel();
+		
+		a.setTimelyNumber(100);
+		b.setTimelyNumber(200);
 	}
 
 	@Test

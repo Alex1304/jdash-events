@@ -40,7 +40,7 @@ public abstract class GDEventScanner<T extends GDComponent> {
 	 * Performs the scan. The request to GD servers is executed, and then will
 	 * call the method
 	 * {@link GDEventScanner#compareAndListEvents(GDComponent, GDComponent)} and
-	 * immediately dispatches the returned event hen applicable.
+	 * immediately dispatches the returned event when applicable.
 	 * 
 	 * @throws GDAPIException
 	 *             if a problem occured while sending the request to GD servers
