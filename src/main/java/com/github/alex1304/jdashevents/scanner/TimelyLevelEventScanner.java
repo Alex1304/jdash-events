@@ -16,8 +16,9 @@ public class TimelyLevelEventScanner extends ComponentUpdatedEventScanner<GDTime
 	 *            - the http client instance to use
 	 * @param changedEvent
 	 *            - the label of the event it should emit
-	 * @param timelyID
-	 *            - the ID of the timely level to scan
+	 * @param weekly
+	 *            - whether to scan for Daily level (false) or Weekly demon
+	 *            (true)
 	 */
 	public TimelyLevelEventScanner(GDHttpClient client, String changedEvent, boolean weekly) {
 		super(client, new GDTimelyLevelHttpRequest(weekly, client), changedEvent);
