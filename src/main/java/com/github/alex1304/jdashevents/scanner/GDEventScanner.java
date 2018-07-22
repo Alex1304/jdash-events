@@ -20,7 +20,7 @@ import com.github.alex1304.jdashevents.manager.GDEventManager;
  */
 public abstract class GDEventScanner<T extends GDComponent> {
 	
-	private GDHttpClient client;
+	protected GDHttpClient client;
 	protected GDHttpRequest<T> request;
 	private T previousResponse;
 	

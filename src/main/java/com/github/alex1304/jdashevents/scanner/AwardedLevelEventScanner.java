@@ -51,14 +51,13 @@ public class AwardedLevelEventScanner extends ComponentListUpdatedEventScanner<G
 	@Override
 	public Predicate<GDLevelPreview> ignoreRemovedComponentIf() {
 		return x -> {
-			GDHttpClient client = new GDHttpClient();
 			GDLevel level = null;
 			try {
 				level = client.fetch(new GDLevelHttpRequest(x.getId()));
 			} catch (GDAPIException e) {
 				return true;
 			}
-			return level != null && (level.getStars() > 0 || level.hasCoinsVerified());
+			return level == null || level.getStars() > 0 || level.hasCoinsVerified();
 		};
 	}
 
