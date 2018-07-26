@@ -126,9 +126,9 @@ public class AwardedLevelEventScannerTest {
 		e.add(kotoruption);
 		
 		// Added and deleted
-		f.add(bloodlust);
-		f.add(bloodbath);
 		f.add(sonicwave);
+		f.add(bloodbath);
+		f.add(bloodlust);
 		f.add(nerves);
 		
 		// Updated
@@ -173,9 +173,14 @@ public class AwardedLevelEventScannerTest {
 	public void test_addedAndDeleted_compareAndListEvents() {
 		final List<GDDispatchableEvent> expected = new ArrayList<>();
 		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_ADDED,
-				new GDComponentList<>(Arrays.asList(bloodbath, sonicwave))));
+				new GDComponentList<>(Arrays.asList(sonicwave))));
 		expected.add(new GDDispatchableEvent(CommonEvents.AWARDED_LEVEL_DELETED,
 				new GDComponentList<>(Arrays.asList(doramichallenge))));
+		
+		// Remember that in this case, bloodbath isn't considered as a new awarded because
+		// we are assuming bloodbath was in top of the 2nd page of Awarded section before 
+		// doramichallenge got unrated. Unrating doramichallenge would have pulled 
+		// bloodbath down to the first page
 		
 		assertEquals(expected, scanner.compareAndListEvents(a, f));
 	}
