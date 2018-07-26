@@ -86,6 +86,11 @@ public abstract class ComponentListUpdatedEventScanner<T extends GDComponent> ex
 		removed.removeIf(this.ignoreRemovedComponentIf());
 		updated.removeIf(this.ignoreUpdatedComponentIf());
 		
+		// For each item in the removed list, remove the last item from the added list
+		// This is to ignore components being added at the bottom when a component is removed
+		for (int i = 0 ; i < removed.size() && !added.isEmpty() ; i++)
+			added.remove(added.size() - 1);
+		
 		if (!added.isEmpty())
 			eventList.add(new GDDispatchableEvent(addedEvent, added));
 		if (!removed.isEmpty())
