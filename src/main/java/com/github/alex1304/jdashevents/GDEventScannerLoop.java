@@ -1,7 +1,7 @@
 package com.github.alex1304.jdashevents;
 
 import java.time.Duration;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -11,11 +11,11 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import com.github.alex1304.jdash.client.AuthenticatedGDClient;
-import com.github.alex1304.jdashevents.event.GDEvent;
 import com.github.alex1304.jdashevents.scanner.GDEventScanner;
 
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
 
@@ -25,12 +25,14 @@ public class GDEventScannerLoop {
 	private final Flux<Tuple2<GDEventScanner, ?>> loop;
 	private Optional<Disposable> disposable;
 	
-	GDEventScannerLoop(AuthenticatedGDClient client, GDEventDispatcher dispatcher, List<GDEventScanner> scanners, Duration interval) {
+	GDEventScannerLoop(AuthenticatedGDClient client, GDEventDispatcher dispatcher, Collection<? extends GDEventScanner> scanners, Duration interval) {
 		this.dispatcher = Objects.requireNonNull(dispatcher);
 		this.disposable = Optional.empty();
 		this.loop = Flux.interval(interval)
+				.log()
 				.flatMapIterable(__ -> scanners)
 				.flatMap(scanner -> scanner.makeRequest(client)
+						.onErrorResume(e -> Mono.empty())
 						.map(response -> Tuples.of(scanner, response)));
 	}
 	

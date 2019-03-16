@@ -10,7 +10,7 @@ abstract class AbstractGDEventScanner<R> implements GDEventScanner {
 
 	@Override
 	public Mono<?> makeRequest(AuthenticatedGDClient client) {
-		return makeRequest(client);
+		return makeRequest0(client);
 	}
 
 	@Override

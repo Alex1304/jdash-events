@@ -1,11 +1,12 @@
 package com.github.alex1304.jdashevents;
 
 import java.time.Duration;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 import com.github.alex1304.jdash.client.AuthenticatedGDClient;
 import com.github.alex1304.jdashevents.event.GDEvent;
+import com.github.alex1304.jdashevents.scanner.GDEventScanner;
 
 import reactor.core.publisher.DirectProcessor;
 import reactor.core.publisher.Flux;
@@ -17,10 +18,18 @@ public final class GDEventDispatcher {
 	private final Scheduler scheduler;
 	private final GDEventScannerLoop scannerLoop;
 
-	public GDEventDispatcher(AuthenticatedGDClient client, Scheduler scheduler, Duration loopInterval) {
+	/**
+	 * Creates a new event dispatcher.
+	 * 
+	 * @param client the client to use for requests
+	 * @param scheduler the scheduler to use for publishing events
+	 * @param scanners the scanners to connect to this event dispatcher
+	 * @param loopInterval the interval at which scanners will be solicited
+	 */
+	public GDEventDispatcher(AuthenticatedGDClient client, Scheduler scheduler, Collection<? extends GDEventScanner> scanners, Duration loopInterval) {
 		this.processor = DirectProcessor.create();
 		this.scheduler = Objects.requireNonNull(scheduler);
-		this.scannerLoop = new GDEventScannerLoop(client, this, new ArrayList<>(), loopInterval);
+		this.scannerLoop = new GDEventScannerLoop(client, this, scanners, loopInterval);
 	}
 	
 	/**

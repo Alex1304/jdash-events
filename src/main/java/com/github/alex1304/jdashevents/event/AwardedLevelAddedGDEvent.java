@@ -15,4 +15,9 @@ public class AwardedLevelAddedGDEvent implements GDEvent {
 	public GDLevel getAddedLevel() {
 		return addedLevel;
 	}
+
+	@Override
+	public String toString() {
+		return "AwardedLevelAddedGDEvent [addedLevel=" + addedLevel + "]";
+	}
 }
