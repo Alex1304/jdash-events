@@ -6,10 +6,10 @@ import com.github.alex1304.jdashevents.event.TimelyLevelChangedEvent;
 
 import reactor.core.publisher.Flux;
 
-abstract class TimelyLevelScanner extends AbstractGDEventScanner<GDTimelyLevel> {
+abstract class TimelyLevelScanner implements TypeSafeGDEventScanner<GDTimelyLevel> {
 
 	@Override
-	final Flux<GDEvent> scan0(GDTimelyLevel previousResponse, GDTimelyLevel newResponse) {
+	public final Flux<GDEvent> typeSafeScan(GDTimelyLevel previousResponse, GDTimelyLevel newResponse) {
 		return previousResponse.equals(newResponse) ? Flux.empty() : Flux.just(new TimelyLevelChangedEvent(newResponse));
 	}
 

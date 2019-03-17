@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
 public class DailyLevelScanner extends TimelyLevelScanner {
 
 	@Override
-	Mono<GDTimelyLevel> makeRequest0(AuthenticatedGDClient client) {
+	public Mono<GDTimelyLevel> typeSafeMakeRequest(AuthenticatedGDClient client) {
 		return client.getWeeklyDemon();
 	}
 

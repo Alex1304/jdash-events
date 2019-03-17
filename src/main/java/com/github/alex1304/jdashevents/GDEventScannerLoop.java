@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -16,24 +17,25 @@ import com.github.alex1304.jdashevents.scanner.GDEventScanner;
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.SignalType;
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
 
 public class GDEventScannerLoop {
 	
 	private final GDEventDispatcher dispatcher;
-	private final Flux<Tuple2<GDEventScanner, ?>> loop;
+	private final Flux<Tuple2<GDEventScanner, Object>> loop;
 	private Optional<Disposable> disposable;
 	
-	GDEventScannerLoop(AuthenticatedGDClient client, GDEventDispatcher dispatcher, Collection<? extends GDEventScanner> scanners, Duration interval) {
+	public GDEventScannerLoop(AuthenticatedGDClient client, GDEventDispatcher dispatcher, Collection<? extends GDEventScanner> scanners, Duration interval) {
 		this.dispatcher = Objects.requireNonNull(dispatcher);
 		this.disposable = Optional.empty();
 		this.loop = Flux.interval(interval)
-				.log()
 				.flatMapIterable(__ -> scanners)
 				.flatMap(scanner -> scanner.makeRequest(client)
 						.onErrorResume(e -> Mono.empty())
-						.map(response -> Tuples.of(scanner, response)));
+						.map(response -> Tuples.of((GDEventScanner) scanner, (Object) response)))
+				.log("jdash-events-scanner-loop", Level.FINE, SignalType.values());
 	}
 	
 	public void start() {
@@ -50,31 +52,31 @@ public class GDEventScannerLoop {
 		disposable = Optional.empty();
 	}
 	
-	private final class LoopSubscriber implements Subscriber<Tuple2<GDEventScanner, ?>>, Disposable {
+	private final class LoopSubscriber implements Subscriber<Tuple2<GDEventScanner, Object>>, Disposable {
 		
 		private final Map<GDEventScanner, Object> previousResponseForEachScanner;
-		private Subscription sub;
+		private Optional<Subscription> sub;
 		
 		LoopSubscriber() {
 			this.previousResponseForEachScanner = new ConcurrentHashMap<>();
-			this.sub = null;
+			this.sub = Optional.empty();
 		}
 		
 		@Override
 		public void dispose() {
-			if (sub != null) {
-				throw new IllegalStateException("Attempt to cancel a non-existant subscription");
-			}
+			sub.ifPresent(Subscription::cancel);
+			sub = Optional.empty();
 			previousResponseForEachScanner.clear();
-			sub.cancel();
 		}
+		
 		@Override
 		public void onSubscribe(Subscription s) {
 			s.request(Long.MAX_VALUE);
-			this.sub = s;
+			this.sub = Optional.of(s);
 		}
+		
 		@Override
-		public void onNext(Tuple2<GDEventScanner, ?> tuple) {
+		public void onNext(Tuple2<GDEventScanner, Object> tuple) {
 			previousResponseForEachScanner.compute(tuple.getT1(), (__, previousResponse) -> {
 				Object newResponse = tuple.getT2();
 				if (previousResponse != null) {
@@ -83,9 +85,11 @@ public class GDEventScannerLoop {
 				return tuple.getT2();
 			});
 		}
+		
 		@Override
 		public void onError(Throwable t) {
 		}
+		
 		@Override
 		public void onComplete() {
 		}
