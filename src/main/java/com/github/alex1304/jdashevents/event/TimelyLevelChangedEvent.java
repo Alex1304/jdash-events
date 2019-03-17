@@ -4,18 +4,18 @@ import com.github.alex1304.jdash.entity.GDTimelyLevel;
 
 public class TimelyLevelChangedEvent implements GDEvent {
 	
-	private final GDTimelyLevel level;
+	private final GDTimelyLevel timelyLevel;
 
-	public TimelyLevelChangedEvent(GDTimelyLevel level) {
-		this.level = level;
+	public TimelyLevelChangedEvent(GDTimelyLevel timelyLevel) {
+		this.timelyLevel = timelyLevel;
 	}
 
-	public GDTimelyLevel getLevel() {
-		return level;
+	public GDTimelyLevel getTimelyLevel() {
+		return timelyLevel;
 	}
 
 	@Override
 	public String toString() {
-		return "TimelyLevelChangedEvent [level=" + level + "]";
+		return "TimelyLevelChangedEvent [level=" + timelyLevel + "]";
 	}
 }

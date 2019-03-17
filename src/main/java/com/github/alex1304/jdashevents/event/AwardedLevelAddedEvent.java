@@ -4,11 +4,11 @@ import java.util.Objects;
 
 import com.github.alex1304.jdash.entity.GDLevel;
 
-public class AwardedLevelAddedGDEvent implements GDEvent {
+public class AwardedLevelAddedEvent implements GDEvent {
 	
 	private final GDLevel addedLevel;
 
-	public AwardedLevelAddedGDEvent(GDLevel addedLevel) {
+	public AwardedLevelAddedEvent(GDLevel addedLevel) {
 		this.addedLevel = Objects.requireNonNull(addedLevel);
 	}
 
@@ -18,6 +18,6 @@ public class AwardedLevelAddedGDEvent implements GDEvent {
 
 	@Override
 	public String toString() {
-		return "AwardedLevelAddedGDEvent [addedLevel=" + addedLevel + "]";
+		return "AwardedLevelAddedEvent [addedLevel=" + addedLevel + "]";
 	}
 }

@@ -7,7 +7,7 @@ import java.util.Collection;
 import com.github.alex1304.jdash.client.AuthenticatedGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.exception.GDLoginFailedException;
-import com.github.alex1304.jdashevents.event.AwardedLevelAddedGDEvent;
+import com.github.alex1304.jdashevents.event.GDEvent;
 import com.github.alex1304.jdashevents.scanner.AwardedSectionScanner;
 import com.github.alex1304.jdashevents.scanner.DailyLevelScanner;
 import com.github.alex1304.jdashevents.scanner.GDEventScanner;
@@ -23,16 +23,19 @@ public class TestMain {
 			return;
 		}
 		// Build an authenticated GD client
-		AuthenticatedGDClient client = GDClientBuilder.create().buildAuthenticated(args[0], args[1]);
+		AuthenticatedGDClient client = GDClientBuilder.create()
+				.withHost("185.25.206.150/alex1304gds")
+				.withMaxConnections(1)
+				.buildAuthenticated(args[0], args[1]);
 		// Create the event dispatcher
 		GDEventDispatcher dispatcher = new GDEventDispatcher();
 		// Subscribe to any events you want!
-		dispatcher.on(AwardedLevelAddedGDEvent.class)
+		dispatcher.on(GDEvent.class)
 				.subscribe(System.out::println);
 		// In order to dispatch new events, you can either do it manually...
-		client.getLevelById(10565740)
-				.map(AwardedLevelAddedGDEvent::new)
-				.subscribe(dispatcher::dispatch);
+//		client.getLevelById(10565740)
+//				.map(AwardedLevelAddedEvent::new)
+//				.subscribe(dispatcher::dispatch);
 		// ...or automatically via a scanner loop!
 		// Scanners are capable of refreshing a certain resource in the game at regular intervals
 		// in order to produce new events.
