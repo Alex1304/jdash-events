@@ -56,6 +56,7 @@ public class AwardedSectionScanner implements TypeSafeGDEventScanner<GDPaginator
 				.map(level -> Tuples.of(previousLevels.stream().filter(level::equals).findAny().get(), newLevels.stream().filter(level::equals).findAny().get()))
 				.filter(tuple -> tuple.getT1().getStars() != tuple.getT2().getStars()
 						|| tuple.getT1().getDifficulty() != tuple.getT2().getDifficulty()
+						|| tuple.getT1().getDemonDifficulty() != tuple.getT2().getDemonDifficulty()
 						|| tuple.getT1().getFeaturedScore() != tuple.getT2().getFeaturedScore()
 						|| tuple.getT1().isEpic() != tuple.getT2().isEpic()
 						|| tuple.getT1().isAuto() != tuple.getT2().isAuto()

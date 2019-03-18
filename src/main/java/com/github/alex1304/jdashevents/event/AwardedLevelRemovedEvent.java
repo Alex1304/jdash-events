@@ -12,7 +12,7 @@ public class AwardedLevelRemovedEvent implements GDEvent {
 		this.removedLevel = Objects.requireNonNull(removedLevel);
 	}
 
-	public GDLevel getAddedLevel() {
+	public GDLevel getRemovedLevel() {
 		return removedLevel;
 	}
 
