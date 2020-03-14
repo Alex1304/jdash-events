@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import com.github.alex1304.jdash.client.AuthenticatedGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
+import com.github.alex1304.jdash.client.GDClientBuilder.Credentials;
 import com.github.alex1304.jdash.exception.GDLoginFailedException;
 import com.github.alex1304.jdashevents.event.GDEvent;
 import com.github.alex1304.jdashevents.scanner.AwardedSectionScanner;
@@ -24,9 +25,9 @@ public class TestMain {
 		}
 		// Build an authenticated GD client
 		AuthenticatedGDClient client = GDClientBuilder.create()
-				.withHost("185.25.206.150/alex1304gds")
-				.withMaxConnections(1)
-				.buildAuthenticated(args[0], args[1]);
+				.withHost("gdps.alex1304.com/database")
+				.buildAuthenticated(new Credentials(args[0], args[1]))
+				.block();
 		// Create the event dispatcher
 		GDEventDispatcher dispatcher = new GDEventDispatcher();
 		// Subscribe to any events you want!

@@ -1,32 +1,51 @@
 package com.github.alex1304.jdashevents;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
 
 import com.github.alex1304.jdashevents.event.GDEvent;
 
-import reactor.core.publisher.DirectProcessor;
+import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
 public final class GDEventDispatcher {
-	
-	private final DirectProcessor<GDEvent> processor;
 
-	public GDEventDispatcher() {
-		this.processor = DirectProcessor.create();
-	}
-	
+	private final EmitterProcessor<GDEvent> processor;
+	private final Scheduler scheduler;
+
 	/**
-	 * Returns a Flux that can be subscribed to in order to process dispatched events.
+	 * Creates a new GDEventDispatcher that publishes events on the
+	 * {@link Schedulers#boundedElastic()} scheduler.
+	 */
+	public GDEventDispatcher() {
+		this(Schedulers.boundedElastic());
+	}
+
+	/**
+	 * Creates a new GDEventDispatcher with the specified scheduler
+	 * 
+	 * @param scheduler the scheduler that should be used to publish events
+	 */
+	public GDEventDispatcher(Scheduler scheduler) {
+		this.processor = EmitterProcessor.create(false);
+		this.scheduler = requireNonNull(scheduler, "scheduler cannot be null");
+	}
+
+	/**
+	 * Returns a Flux that can be subscribed to in order to process dispatched
+	 * events.
 	 * 
 	 * @param eventClass the class of the event to listen to
 	 * @return a Flux emitting the received events for the given type
 	 */
 	public <E extends GDEvent> Flux<E> on(Class<E> eventClass) {
 		Objects.requireNonNull(eventClass);
-		return processor.publishOn(Schedulers.elastic()).ofType(eventClass);
+		return processor.publishOn(scheduler).ofType(eventClass);
 	}
-	
+
 	/**
 	 * Dispatches a new event.
 	 * 
