@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.alex1304</groupId>
@@ -8,7 +10,7 @@
 
 	<name>jdash-events</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<description>A Java library for Geometry Dash events.</description>
 
 	<licenses>
@@ -18,7 +20,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+
 	<developers>
 		<developer>
 			<name>Alex1304</name>
@@ -28,16 +30,18 @@
 
 	<scm>
 		<url>https://github.com/Alex1304/jdash-events/tree/master</url>
-		<connection>scm:git:git://github.com/Alex1304/jdash-events.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/Alex1304/jdash-events.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<connection>scm:git:git://github.com/Alex1304/jdash-events.git
+		</connection>
+		<developerConnection>scm:git:ssh://git@github.com/Alex1304/jdash-events.git
+		</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
-	
+
+
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -45,10 +49,11 @@
 		</snapshotRepository>
 		<repository>
 			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/
+			</url>
 		</repository>
 	</distributionManagement>
-  	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -81,7 +86,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>3.0.0-M1</version><!--$NO-MVN-MAN-VER$-->
+				<version>3.0.0-M1</version><!--$NO-MVN-MAN-VER$ -->
 				<configuration>
 					<tagNameFormat>v@{project.version}</tagNameFormat>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
@@ -122,6 +127,9 @@
 								</goals>
 							</execution>
 						</executions>
+						<configuration>
+							<source>8</source>
+						</configuration>
 					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
@@ -141,7 +149,7 @@
 			</build>
 		</profile>
 	</profiles>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.github.alex1304</groupId>
