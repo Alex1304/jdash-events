@@ -38,6 +38,7 @@ public final class GDEventDispatcher {
 	 * Returns a Flux that can be subscribed to in order to process dispatched
 	 * events.
 	 * 
+	 * @param <E> the type of GD event
 	 * @param eventClass the class of the event to listen to
 	 * @return a Flux emitting the received events for the given type
 	 */
