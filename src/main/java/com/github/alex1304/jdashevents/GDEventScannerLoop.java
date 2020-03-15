@@ -37,7 +37,7 @@ public class GDEventScannerLoop {
 				.flatMap(scanner -> scanner.makeRequest(client)
 						.onErrorResume(e -> Mono.empty())
 						.map(response -> Tuples.of((GDEventScanner) scanner, (Object) response)))
-				.log(GDEventScannerLoop.class.getName(), Level.INFO, SignalType.values());
+				.log(GDEventScannerLoop.class.getName(), Level.FINE, SignalType.values());
 	}
 	
 	public void start() {

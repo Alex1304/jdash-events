@@ -8,6 +8,7 @@ import com.github.alex1304.jdash.client.AuthenticatedGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.client.GDClientBuilder.Credentials;
 import com.github.alex1304.jdash.exception.GDLoginFailedException;
+import com.github.alex1304.jdashevents.event.AwardedLevelAddedEvent;
 import com.github.alex1304.jdashevents.event.GDEvent;
 import com.github.alex1304.jdashevents.scanner.AwardedSectionScanner;
 import com.github.alex1304.jdashevents.scanner.DailyLevelScanner;
@@ -32,11 +33,12 @@ public class TestMain {
 		GDEventDispatcher dispatcher = new GDEventDispatcher();
 		// Subscribe to any events you want!
 		dispatcher.on(GDEvent.class)
+				.map(event -> "GD event fired! " + event)
 				.subscribe(System.out::println);
 		// In order to dispatch new events, you can either do it manually...
-//		client.getLevelById(10565740)
-//				.map(AwardedLevelAddedEvent::new)
-//				.subscribe(dispatcher::dispatch);
+		client.getLevelById(32)
+				.map(AwardedLevelAddedEvent::new)
+				.subscribe(dispatcher::dispatch, null, null, s -> s.request(1));
 		// ...or automatically via a scanner loop!
 		// Scanners are capable of refreshing a certain resource in the game at regular intervals
 		// in order to produce new events.
