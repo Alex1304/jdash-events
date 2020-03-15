@@ -54,6 +54,6 @@ public final class GDEventDispatcher {
 	 */
 	public void dispatch(GDEvent event) {
 		Objects.requireNonNull(event);
-		processor.sink().next(event);
+		processor.onNext(event);
 	}
 }
